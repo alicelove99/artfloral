@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>艺·花集 Art Floral</title>
+<style>
+:root{--bg:#faf7f4;--card:#fffdfb;--ink:#3f3532;--mute:#7a6b68;--plum:#84495a;--blush:#eddfdf;--line:#e6d8d6;--rose:#bd8190;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1a1a;--card:#2a2323;--ink:#f1e8e6;--mute:#b5a5a2;--plum:#c98a9b;--blush:#3a2e2f;--line:#4a3d3d;--rose:#c98a9b}}
+:root[data-theme="dark"]{--bg:#1f1a1a;--card:#2a2323;--ink:#f1e8e6;--mute:#b5a5a2;--plum:#c98a9b;--blush:#3a2e2f;--line:#4a3d3d;--rose:#c98a9b}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Serif SC","Songti SC",Georgia,serif;line-height:1.6}
+.sans{font-family:-apple-system,"PingFang SC","Helvetica Neue",Arial,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+header{padding:22px 0 14px;border-bottom:1px solid var(--line)}
+.logo{font-size:26px;letter-spacing:.02em}
+.logo small{display:block;font-size:13px;letter-spacing:.5em;color:var(--mute);margin-top:2px}
+.eyebrow{font-size:12px;letter-spacing:.3em;color:var(--plum);margin:44px 0 14px}
+h1{font-size:40px;line-height:1.25;font-weight:500;margin:0 0 18px}
+.lead{color:var(--mute);margin:0 0 24px}
+.btn{display:inline-block;border:0;background:var(--plum);color:#fff;font:inherit;padding:14px 28px;border-radius:99px;cursor:pointer;text-decoration:none;font-size:16px}
+.btn.ghost{background:var(--blush);color:var(--plum);width:100%;text-align:center}
+.btn.ghost.on{background:var(--plum);color:#fff}
+.loc{margin:26px 0 0;font-size:13px;color:var(--mute);letter-spacing:.08em}
+.arch{margin:34px 0 0;background:var(--blush);border-radius:999px 999px 24px 24px;padding:52px 20px 28px;text-align:center}
+.arch svg{width:210px;height:auto}
+h2{font-size:26px;font-weight:500;margin:56px 0 18px}
+.chips{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;margin-bottom:18px}
+.chip{flex:none;border:1px solid var(--line);background:none;color:var(--ink);font:inherit;font-size:15px;padding:9px 20px;border-radius:99px;cursor:pointer}
+.chip.on{background:var(--plum);border-color:var(--plum);color:#fff}
+.grid{display:grid;gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.ph{background:var(--blush);padding:26px 0 14px;text-align:center;position:relative}
+.ph svg{width:150px;height:auto}
+.ph .tag{position:absolute;left:14px;bottom:10px;font-size:11px;color:var(--mute)}
+.body{padding:18px 22px 22px}
+.cat{font-size:11px;letter-spacing:.25em;color:var(--plum)}
+.body h3{font-size:21px;font-weight:500;margin:4px 0 6px}
+.body p{margin:0 0 12px;color:var(--mute);font-size:14px}
+.price{font-size:14px;margin-bottom:14px}
+form{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px}
+label{display:block;font-size:14px;color:var(--mute);margin:14px 0 6px}
+input,textarea,select{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+textarea{min-height:80px;resize:vertical}
+.row{display:flex;gap:10px}
+.row label.opt{flex:1;display:flex;align-items:center;gap:8px;margin:0;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--ink);cursor:pointer}
+.row input{width:auto}
+.sel{font-size:14px;background:var(--blush);border-radius:14px;padding:12px 14px;color:var(--plum)}
+.fine{font-size:12px;color:var(--mute);margin:10px 0 0;text-align:center}
+.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(520px,calc(100% - 28px));background:var(--plum);color:#fff;border-radius:99px;padding:14px 22px;display:none;justify-content:space-between;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:5;cursor:pointer;font-size:15px}
+.msg{display:block;width:100%;text-align:left;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.msg.on{border-color:var(--plum);background:var(--blush);color:var(--plum)}
+footer{padding:44px 0 110px;text-align:center;font-size:12px;color:var(--mute);letter-spacing:.1em}
+.toast{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:14px;display:none;z-index:9}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="bq" viewBox="0 0 200 230">
+<path d="M28 70c-8 20 8 52 36 70l36-30-6-60z" fill="#94a58a"/><path d="M172 70c8 20-8 52-36 70l-36-30 6-60z" fill="#94a58a"/>
+<path d="M52 118l48 98 48-98z" fill="#e4d4cd"/><path d="M80 118l20 98 20-98z" fill="#f6efe6"/>
+<g fill="currentColor"><circle cx="52" cy="62" r="27"/><circle cx="100" cy="46" r="29"/><circle cx="148" cy="62" r="27"/><circle cx="72" cy="98" r="29"/><circle cx="128" cy="98" r="29"/><circle cx="100" cy="128" r="28"/></g>
+<g fill="none" stroke="#f3dfe4" stroke-width="3" stroke-linecap="round" opacity=".85">
+<path d="M52 62m0-4a4 4 0 1 1-4 4a10 10 0 1 1 10 10"/><path d="M100 46m0-4a4 4 0 1 1-4 4a11 11 0 1 1 11 11"/><path d="M148 62m0-4a4 4 0 1 1-4 4a10 10 0 1 1 10 10"/><path d="M72 98m0-4a4 4 0 1 1-4 4a11 11 0 1 1 11 11"/><path d="M128 98m0-4a4 4 0 1 1-4 4a11 11 0 1 1 11 11"/><path d="M100 128m0-4a4 4 0 1 1-4 4a11 11 0 1 1 11 11"/></g>
+<path d="M82 170l36 14m0-14l-36 14" stroke="#9a5b6b" stroke-width="6" stroke-linecap="round"/><ellipse cx="100" cy="222" rx="46" ry="6" fill="#d7c4c3"/>
+</symbol>
+</defs>
+</svg>
+
+<div class="toast" id="toast"></div>
+
+<div class="wrap">
+  <header><div class="logo">Art Floral<small>艺 · 花 集</small></div></header>
+
+  <div class="eyebrow sans">A LITTLE ART. A LOT OF LOVE.</div>
+  <h1>让心意，<br>有花的模样。</h1>
+  <p class="lead">为日常的小确幸，也为值得纪念的大日子。在艺·花集，选一份属于你的花礼。</p>
+  <a class="btn" href="#collection">挑选花礼 ↓</a>
+  <p class="loc sans">JOHOR BAHRU · IMPIAN EMAS<br>南方大学对面 · 自取 / 配送安排</p>
+  <div class="arch"><svg style="color:var(--rose)"><use href="#bq"/></svg></div>
+
+  <h2 id="collection">心意花礼 <span class="sans" style="font-size:14px;color:var(--mute)">Collection</span></h2>
+  <div class="chips sans" id="chips"></div>
+  <div class="grid" id="grid"></div>
+
+  <h2 id="order">下单 <span class="sans" style="font-size:14px;color:var(--mute)">Order</span></h2>
+  <form id="f" class="sans" onsubmit="return false">
+    <div class="sel" id="sel">还没有选花礼，请在上面点「选这份心意」</div>
+    <label>您的称呼</label><input id="name" placeholder="例如：Jackie" autocomplete="name">
+    <label>联系电话</label><input id="tel" type="tel" placeholder="例如：012-3456789" autocomplete="tel">
+    <label>取花 / 送花日期</label><input id="date" type="date">
+    <label>方式</label>
+    <div class="row"><label class="opt"><input type="radio" name="m" value="自取" checked>自取</label><label class="opt"><input type="radio" name="m" value="配送">配送</label></div>
+    <div id="addrBox" style="display:none"><label>配送地址</label><textarea id="addr" placeholder="详细地址"></textarea></div>
+    <label>预算（RM）</label><input id="budget" inputmode="numeric" placeholder="例如：100">
+    <label>卡片祝福语（选填）：先选送给谁，再点喜欢的一句</label>
+    <div class="chips" id="rtypes"></div>
+    <div id="rlist"></div>
+    <button type="button" class="btn ghost" id="rmore" style="margin:2px 0 12px;padding:10px">换一批 ↻</button>
+    <textarea id="card" placeholder="点上面的祝福语会自动填入，也可以自己修改"></textarea>
+    <label>其他要求（选填）</label><textarea id="note" placeholder="喜欢的颜色、花材、场合等"></textarea>
+    <p style="margin:18px 0 0"><button class="btn" style="width:100%" id="send">通过 WhatsApp 下单</button></p>
+    <p class="fine">点击后会打开 WhatsApp，订单信息已自动写好，发送给我们即可确认。</p>
+    <p style="margin:12px 0 0"><button class="btn ghost" id="copy" type="button">复制订单信息</button></p>
+  </form>
+
+  <footer>© 艺·花集 Art Floral · MADE WITH LOVE</footer>
+</div>
+
+<div class="bar sans" id="bar"><span id="barTxt"></span><span>去下单 →</span></div>
+
+<script>
+// ====== 在这里修改 ======
+var WA = "601176283688"; // 你的 WhatsApp 号码，国家码开头、不带加号，例如 60123456789
+var PRICE_DEFAULT = "按款式及预算报价"; // 想显示价格就改成 "RM 68 起"
+var PRODUCTS = [
+  {id:1, cat:"鲜花", en:"FRESH FLOWERS", name:"鲜花花束", desc:"用鲜花的温柔，陪你庆祝生日、毕业与每一个重要时刻。", price:PRICE_DEFAULT, color:"#bd8190"},
+  {id:2, cat:"鲜花", en:"FRESH FLOWERS", name:"毕业花束", desc:"为努力的人，送上一束属于毕业季的祝福。", price:PRICE_DEFAULT, color:"#c99a7c"},
+  {id:3, cat:"香皂花", en:"SOAP FLOWERS", name:"香皂花花束", desc:"不会凋谢的花，香气与心意都能久久保存。", price:PRICE_DEFAULT, color:"#9b84b3"},
+  {id:4, cat:"香皂花", en:"SOAP FLOWERS", name:"香皂花礼盒", desc:"精致礼盒装，适合送长辈、老师与朋友。", price:PRICE_DEFAULT, color:"#8fa9b8"},
+  {id:5, cat:"定制花礼", en:"CUSTOM", name:"定制花礼", desc:"告诉我们场合与预算，为你设计独一无二的花礼。", price:PRICE_DEFAULT, color:"#a45d72"}
+];
+// =======================
+var CATS = ["全部","鲜花","香皂花","定制花礼"], cur = "全部", picked = {};
+function $(i){return document.getElementById(i)}
+function toast(t){var e=$("toast");e.textContent=t;e.style.display="block";setTimeout(function(){e.style.display="none"},2200)}
+function renderChips(){
+  $("chips").innerHTML = CATS.map(function(c){return '<button class="chip'+(c===cur?' on':'')+'" data-c="'+c+'">'+c+'</button>'}).join("");
+}
+function renderGrid(){
+  $("grid").innerHTML = PRODUCTS.filter(function(p){return cur==="全部"||p.cat===cur}).map(function(p){
+    var on = picked[p.id];
+    return '<div class="card"><div class="ph"><svg style="color:'+p.color+'"><use href="#bq"/></svg><span class="tag">花艺插画 · 实际商品图片待上传</span></div>'+
+      '<div class="body"><div class="cat">'+p.en+'</div><h3>'+p.name+'</h3><p>'+p.desc+'</p><div class="price">'+p.price+'</div>'+
+      '<button class="btn ghost'+(on?' on':'')+'" data-id="'+p.id+'">'+(on?'已选择 ✓':'选这份心意 +')+'</button></div></div>';
+  }).join("");
+}
+function names(){return PRODUCTS.filter(function(p){return picked[p.id]}).map(function(p){return p.name})}
+function refresh(){
+  var n = names();
+  $("sel").textContent = n.length ? "已选：" + n.join("、") : "还没有选花礼，请在上面点「选这份心意」";
+  $("bar").style.display = n.length ? "flex" : "none";
+  $("barTxt").textContent = "已选 " + n.length + " 款";
+  renderGrid();
+}
+$("chips").addEventListener("click",function(e){var c=e.target.getAttribute("data-c");if(c){cur=c;renderChips();renderGrid()}});
+$("grid").addEventListener("click",function(e){var id=e.target.getAttribute("data-id");if(id){picked[id]=!picked[id];refresh()}});
+$("bar").addEventListener("click",function(){$("order").scrollIntoView()});
+document.querySelectorAll('input[name="m"]').forEach(function(r){r.addEventListener("change",function(){
+  $("addrBox").style.display = document.querySelector('input[name="m"]:checked').value==="配送" ? "block" : "none";
+})});
+function buildMsg(){
+  var m = document.querySelector('input[name="m"]:checked').value;
+  var L = ["【艺·花集 订单】"];
+  var n = names();
+  L.push("花礼：" + (n.length ? n.join("、") : "未选（请推荐）"));
+  L.push("称呼：" + $("name").value.trim());
+  L.push("电话：" + $("tel").value.trim());
+  L.push("日期：" + ($("date").value || "未填"));
+  L.push("方式：" + m);
+  if(m==="配送") L.push("地址：" + $("addr").value.trim());
+  if($("budget").value.trim()) L.push("预算：RM " + $("budget").value.trim());
+  if($("card").value.trim()) L.push("卡片祝福语：" + $("card").value.trim());
+  if($("note").value.trim()) L.push("其他要求：" + $("note").value.trim());
+  return L.join("\n");
+}
+function valid(){
+  if(!$("name").value.trim() || !$("tel").value.trim()){toast("请填写称呼和电话");return false}
+  if(!$("date").value){toast("请选择日期");return false}
+  if(document.querySelector('input[name="m"]:checked').value==="配送" && !$("addr").value.trim()){toast("请填写配送地址");return false}
+  return true;
+}
+$("send").addEventListener("click",function(){
+  if(!valid()) return;
+  if(WA.indexOf("X")>-1){toast("店主还没设置 WhatsApp 号码");return}
+  window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(buildMsg()),"_blank");
+});
+$("copy").addEventListener("click",function(){
+  if(!valid()) return;
+  var t = buildMsg();
+  try{navigator.clipboard.writeText(t).then(function(){toast("已复制，可粘贴给我们")},function(){toast("复制失败，请手动长按复制")})}catch(e){toast("复制失败")}
+});
+var MSGS = {
+  "朋友":["谢谢你一直陪在我身边，愿你每天都被温柔对待。","愿你的日子像花一样，热烈又明亮。","生日快乐！新的一岁，万事顺心，天天开心。","有你这个朋友，真好。","恭喜你，一路努力终于开花结果！","愿你所求皆如愿，所行皆坦途。","送你一束花，也送你满满的好运。","不管多忙，都要记得好好爱自己。"],
+  "对象":["遇见你，是我一年四季里最美的风景。","谢谢你出现在我的生命里，爱你每一天。","愿往后的每一天，都有花，也都有你。","余生请多指教，我的小确幸。","你是我最想牵手走很远很远的人。","今天的花送给你，明天的我也属于你。","纪念日快乐，爱你比昨天多一点。","我爱你，不只是今天。"],
+  "长辈":["祝您身体健康，平安喜乐，笑口常开。","感谢您一直以来的照顾与教导，祝您生日快乐。","愿岁月温柔待您，福寿安康。","您辛苦了，愿您天天开心，万事如意。","母亲节快乐！谢谢您无条件的爱。","祝您福如东海，寿比南山。","愿您每天都有花香相伴，心情美丽。","平安是福，健康是宝，祝您幸福安康。"],
+  "老师":["感谢您的悉心教导，祝您教师节快乐。","谢谢您照亮我前行的路，祝您身体健康。","桃李满天下，愿您一切顺利。","您的教诲，学生铭记于心，谢谢您。","感谢您的耐心与陪伴，祝您平安喜乐。","因为有您，我才能走到今天，谢谢您。","愿您每天都被花香和笑容围绕。","师恩难忘，祝福您。"]
+};
+var rt = "朋友", rp = 0, PER = 4, curList = [];
+function renderRec(){
+  $("rtypes").innerHTML = Object.keys(MSGS).map(function(k){return '<button type="button" class="chip'+(k===rt?' on':'')+'" data-t="'+k+'">送'+k+'</button>'}).join("");
+  var a = MSGS[rt]; curList = [];
+  for(var i=0;i<PER;i++) curList.push(a[(rp*PER+i)%a.length]);
+  var v = $("card").value;
+  $("rlist").innerHTML = curList.map(function(t,i){return '<button type="button" class="msg'+(v===t?' on':'')+'" data-i="'+i+'">'+t+'</button>'}).join("");
+}
+$("rtypes").addEventListener("click",function(e){var t=e.target.getAttribute("data-t");if(t){rt=t;rp=0;renderRec()}});
+$("rlist").addEventListener("click",function(e){var i=e.target.getAttribute("data-i");if(i!==null){$("card").value=curList[i];renderRec()}});
+$("rmore").addEventListener("click",function(){rp++;renderRec()});
+$("card").addEventListener("input",renderRec);
+renderRec();
+var d = new Date(); d.setDate(d.getDate()+1);
+$("date").min = d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+renderChips(); refresh();
+</script>
+</body>
+</html>
